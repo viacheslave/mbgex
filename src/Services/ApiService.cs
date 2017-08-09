@@ -18,6 +18,10 @@ namespace SpringOff.MGBEx
     Task<string> GetFlatMonthList(int flatId, UserProfile profile);
 
     Task<string> GetFlatInfoByMonth(int flatId, UserProfile profile, int month);
+
+    Task<string> GetBillings(int status, UserProfile profile);
+
+    Task<string> GetBillingOrder(string id, UserProfile profile);
   }
   
   internal sealed class ApiService : IApiService
@@ -93,6 +97,32 @@ namespace SpringOff.MGBEx
       httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json"); 
             
       return await GetResponse(client, $"{BaseUrl}/flatlist/flatnac.json", httpContent);
+    }
+
+    public async Task<string> GetBillings(int status, UserProfile profile)
+    {
+      if (profile == null)
+        throw new ArgumentNullException(nameof(profile));
+      
+      var client = GetClient(profile);
+      
+      var httpContent = new StringContent(JsonConvert.SerializeObject(new { status = status }));
+      httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json"); 
+            
+      return await GetResponse(client, $"{BaseUrl}/flatpay/billlist.json", httpContent);
+    }
+
+    public async Task<string> GetBillingOrder(string id, UserProfile profile)
+    {
+      if (profile == null)
+        throw new ArgumentNullException(nameof(profile));
+      
+      var client = GetClient(profile);
+      
+      var httpContent = new StringContent(JsonConvert.SerializeObject(new { idorder = id }));
+      httpContent.Headers.ContentType = new MediaTypeHeaderValue("application/json"); 
+            
+      return await GetResponse(client, $"{BaseUrl}/flatpay/orderinfo.json", httpContent);
     }
 
     private static HttpClient GetClient(UserProfile profile)

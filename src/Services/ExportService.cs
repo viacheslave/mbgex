@@ -40,6 +40,11 @@ namespace SpringOff.MGBEx
       var accountsData = await _apiService.GetAccounts(userProfile);
       Dump(accountsData, $"mgb.accounts.json");
 
+      await DumpBillings(userProfile, 2, "waiting");
+      await DumpBillings(userProfile, 5, "complete");
+      await DumpBillings(userProfile, 6, "rejected");
+
+      /*
       var userAccounts = JsonConvert.DeserializeObject<Dictionary<string, object>>(accountsData);
 
       foreach(var kvp in userAccounts)
@@ -50,7 +55,23 @@ namespace SpringOff.MGBEx
           var account = JsonConvert.DeserializeObject<UserAccount>(kvp.Value.ToString());
           await DumpAccount(account, userProfile);
         }
-      }
+      }*/
+    }
+
+    private async Task DumpBillings(UserProfile profile, int status, string label)
+    {
+      var billingsData = await _apiService.GetBillings(status, profile);
+      if (billingsData == null)
+        return;
+
+      Dump(billingsData, $"mgb.flatBilling.{label}.json");
+
+      var billings = JsonConvert.DeserializeObject<BillingCollection>(billingsData);
+      foreach (var order in billings.Billings.SelectMany(b => b.Orders))
+      {
+        var billingData = await _apiService.GetBillingOrder(order.Id, profile);
+        Dump(billingData, $"mgb.flatBilling.{label}.{order.Id}.json");
+      } 
     }
 
     private async Task DumpAccount(UserAccount account, UserProfile profile)

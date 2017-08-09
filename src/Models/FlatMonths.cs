@@ -6,6 +6,6 @@ namespace SpringOff.MGBEx
   public sealed class FlatMonths
   {
     [JsonProperty("monthlist")]
-    public List<FlatMonth> Months { get; set; }
+    public List<FlatMonth> Months { get; set; } = new List<FlatMonth>();
   }
 }
