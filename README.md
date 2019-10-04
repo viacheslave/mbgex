@@ -1,21 +1,13 @@
-# MGBEx
+# Megabank.Account.Export Tool
 
 ### Description
-The simplest console application that allows you to export your raw Megabank data through the HTTP REST API.
-
+The simplest console application that allows you to export your raw Megabank (megabank.net) data through the HTTP REST API.
 
 ### Prerequisites
-Microsoft .NET Core 2 preview
-
-https://www.microsoft.com/net/core/preview
-
++ Microsoft Visual Studio 2019 / Visual Studio Code
++ Microsoft .NET Core 3 Runtime
 
 ### Usage
-
-From /src folder:
-
-+ dotnet restore
-
-+ dotnet build
-
-+ dotnet run [email] [password]
+~~~~
+Megabank.Account.Export.exe [email] [password]
+~~~~

@@ -57,3 +57,4 @@ src/export/*
 
 *.suo
 /src/.vs
+/src/Properties/launchSettings.json
