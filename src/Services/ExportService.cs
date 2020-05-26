@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +10,7 @@ namespace SpringOff.MGBEx
 	internal sealed class ExportService
 	{
 		private readonly IApiService _apiService;
-		private readonly Microsoft.Extensions.Logging.ILogger _logger;
+		private readonly ILogger _logger;
 
 		private readonly DateTime _stamp = DateTime.Now;
 
@@ -44,17 +43,17 @@ namespace SpringOff.MGBEx
 			await DumpBillings(userProfile, 6, "rejected");
 
 			/*
-      var userAccounts = JsonConvert.DeserializeObject<Dictionary<string, object>>(accountsData);
+			var userAccounts = JsonConvert.DeserializeObject<Dictionary<string, object>>(accountsData);
 
-      foreach(var kvp in userAccounts)
-      {
-        int id;
-        if (int.TryParse(kvp.Key, out id))
-        {
-          var account = JsonConvert.DeserializeObject<UserAccount>(kvp.Value.ToString());
-          await DumpAccount(account, userProfile);
-        }
-      }*/
+			foreach(var kvp in userAccounts)
+			{
+				int id;
+				if (int.TryParse(kvp.Key, out id))
+				{
+					var account = JsonConvert.DeserializeObject<UserAccount>(kvp.Value.ToString());
+					await DumpAccount(account, userProfile);
+				}
+			}*/
 		}
 
 		private async Task DumpBillings(UserProfile profile, int status, string label)

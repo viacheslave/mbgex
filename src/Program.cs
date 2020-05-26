@@ -1,11 +1,10 @@
 ﻿using System;
-using System.IO;
 using Microsoft.Extensions.Logging;
 using NLog.Extensions.Logging;
 
 namespace SpringOff.MGBEx
 {
-  class Program
+	class Program
   {
     static void Main(string[] args)
     {
